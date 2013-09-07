@@ -2,10 +2,20 @@
 layout: default
 ---
 
+//- MRK - this is layout file for post directory
+
+//- MRK - Meta data is at top of file and is between pairs of 3 repeating characters.  Doesn't need to be ---
+//- MRK - some meta data is special.  For example, docpad knows the meaning of the variable 'layout' below.
+
+//- MRK - from Klement: tag <article> is part of HTML5.  Think of it conceptually as being wrapped around
+//- MRK - a blog item.
+//- MRK - class 'post' is probably specific to bootstrap
 article#post.post
+  //- MRK - document is a variable containing info about the current document.
   h1= document.title
   .post-content!= content
 
+//- MRK - relatedDocuments is a collection of docs with a tag matching one in the current doc.
 footer
   if document.relatedDocuments && document.relatedDocuments.length
     section#related

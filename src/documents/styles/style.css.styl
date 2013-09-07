@@ -1,13 +1,100 @@
+//- MRK - *** commented out @media (min-width: 1200px) section in bootstrap-responsive.css ***
+//- MRK - *** so page uses at most width 940px for content.
+//- MRK - global variables
+LIGHTCOLOR = #e50
+DARKCOLOR = #c00
+
+//- MRK - define default link colors
 a, a:link
-  cursor pointer
+  cursor pointer        //- Links show hand when cursor over link
+  color LIGHTCOLOR
 
+a:hover
+  color DARKCOLOR
+
+//- MRK - adjust color and size of text in navbar
+.navbar .nav > .active > a:hover, .navbar .nav > .active > a:focus, .navbar .nav > li > a:hover, .navbar .nav > li > a:focus
+  color DARKCOLOR
+
+.navbar .nav > li > a, .navbar .nav > .active > a
+  color LIGHTCOLOR
+//- MRK - If I won't to make navbar font larger, I need to scale it appropriately for all media sizes.
+//  font-size 20px
+
+@media (min-width: 980px)
+  .navbar
+    width 940px
+    margin-left auto
+    margin-right auto
+//
+//- MRK - Navbar.  Why doesn't this work?
+//- MRK - These are LESS variables used by bootstrap
+
+//- @navbarText: #FF6600
+//- @navbarLinkColor: #FF6600
+//- @navbarLinkColorHover: #CC0000
+//- @navbarLinkColorActive: @navbarLinkColorHover
+//- @navbarLinkBackgroundHover: transparent
+//- @navbarLinkBackgroundActive: @navbarBackground
+//- @navbarBrandColor: @navbarLinkColor 
+
+//- MRK - main rounded corner text holders
+.hero-unit
+  border 1px solid LIGHTCOLOR
+//-  background-color:#fff
+
+//- MRK - color of sidebar headers
+.nav-header
+  color #000
+
+//-@media (min-width: 980px)
 body
-  padding-top 60px
+  background-color #fea
+  background-image url('/img/bg.png')
 
+//- MRK - create space for navbar at top of window.
+//- MRK - only necessary when navbar is fixed to the top class='navbar-fixed-top'
+//- MRK - if padding line is added, must uncomment @media statement above and indent properly
+//-    padding-top 60px
+
+//- MRK - place light gray line at top of all tables.
 table
   tfoot, tbody
     th
       border-top 1px solid #DDD
 
+//- MRK - leave 30px border on bottom of page
 footer
   padding-bottom: 30px
+
+//- MRK - stylus mixin so that wrapper below needs only one line
+//- MRK - to specify box shadow
+box-shadow()
+  -webkit-box-shadow arguments
+  -moz-box-shadow arguments
+  box-shadow arguments
+
+//- MRK - provides maximum with for content.  This is main holder of content.
+.wrapper
+  width auto
+  @media (min-width: 980px)
+    width 980px
+  margin-left auto
+  margin-right auto
+  background-color #fff
+  box-shadow 0 0 6px #000
+
+
+@media (max-width: 767px)
+  //- MRK - once @media has small width .affix allows sidebar to move
+  .affix
+    position static
+  //- MRK - once @media has small enough width, do not show colored background around content.
+  //- MRK - .wrapper border is now against edge.  Should there be a border?
+  body
+    padding-left 0px
+    padding-right 0px
+
+#imgholder img
+  float left
+  padding 20px

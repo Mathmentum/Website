@@ -1,0 +1,29 @@
+---
+title: Workshops
+layout: default
+pageOrder: 2
+---
+
+.row
+  .span3
+    //- MRK - populate sidebar
+    ul.nav.nav-list(data-spy="affix", data-offset-top="0")
+      //- MRK - Loop through each school type
+      h2 Workshops
+      each schooltype in ['Elementary School', 'Middle School', 'High School']
+        li.nav-header= schooltype
+        //- MRK - Display links for workshops matching the school type
+        //- MRK - collections are defined in the docpad configuration file.
+        each doc in getCollection('workshops').toJSON()
+          if doc.workshopSchoolType === schooltype
+            li
+              a(href="#"+doc.workshopTitle)= doc.workshopTitle
+  .span9
+    //- MRK - populate workshops in order of school type
+    //- MRK - toJSON() call turns object into text
+    each schooltype in ['Elementary School', 'Middle School', 'High School']
+      each doc in getCollection('workshops').toJSON()
+        if doc.workshopSchoolType === schooltype
+          a(name=doc.workshopTitle)
+          .hero-unit      
+            != doc.contentRendered

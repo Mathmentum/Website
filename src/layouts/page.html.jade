@@ -2,6 +2,15 @@
 layout: default
 ---
 
+//- MRK - this is layout file for page directory
+
+//- MRK - Meta data is at top of file and is between pairs of 3 repeating characters.  Doesn't need to be ---
+//- MRK - some meta data is special.  For example, docpad knows the meaning of the variable 'layout' below.
+
+//- MRK - what is tag <article>.  Is it special to bootstrap or html
+//- MRK - class 'page' is probably specific to bootstrap
 article#page.page
+  //- MRK - 'document' is a variable containing info about the current document. Is it from docpad?
   h1= document.title
+  //- MRK - content is content of html page referencing this layout.
   .page-content!= content

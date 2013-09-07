@@ -1,0 +1,51 @@
+---
+title: Contact
+layout: page
+pageOrder: 7
+---
+
+//- MRK - added dynamic meta data so if a post is added, this page is reloaded
+//- MRK - have to think about dynamic issues regarding efficiency. 
+//- MRK - Appearance of nav.linklist list is 'date >> href(title)', one per line
+//- MRK - what are types of fields found in objects returned by getCollection?
+
+
+.row
+  .span6
+    p If you would like to contact Mathmentum please use the form below. We look forward to hearing from you and working with you to improve mathematical understanding in our schools.
+    form(method="post")
+      p Your Name (required)
+        br
+        span 
+          input(type="text",name="your-name",value="",size="40")
+      p Your Email (required)
+        br
+        span
+          input(type="text",name="your-email",value="",size="40")
+      p Your Phone Number
+        br
+        span
+          input(type="text",name="your-phone",value="",size="20")
+      p Subject
+        br
+        span
+          input(type="text",name="your-subject",value="",size="40")
+      p Your Message
+        br
+        span
+          textarea(name="your-message",cols="40",rows="10")
+      p
+        input(type="submit",value="Send")
+  .span1
+  .span5
+    p
+      strong Address
+    p Mathmentum
+      br
+      | 55 Ellery St.
+      br
+      | Cambridge, MA 02138</p>
+      br
+      | (617)407-8139
+      br
+      a(href='mailto:customer-support@mathmentum.com') customer-support@mathmentum.com

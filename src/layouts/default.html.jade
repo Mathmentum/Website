@@ -1,5 +1,14 @@
+//- MRK - this is the default layout file and contains navigation bar
+//- MRK - other layout files point at this file
+
+//- MRK - getBlock creates collections out of things specific to docpad
+//- MRK - these might come from node modules, for example.
+
 - var scripts = getBlock('scripts')
 - var styles = getBlock('styles')
+
+//- MRK - the items added to scripts and styles can be found under /out.  These files are
+//- MRK - derived from src/files and perhaps other places.
 
 //- Prettify Syntax Highlighting
 - scripts.add(["/vendor/prettify.js"])
@@ -33,6 +42,7 @@ html(lang="en")
     meta(http-equiv="X-UA-Compatible", content="IE=edge,chrome=1")
 
     //- Our site title and description
+    //- MRK - getPreparedTitle, getPreparedDescription, etc. are all found in docpad.coffee
     title= getPreparedTitle()
     meta(name="description", content=getPreparedDescription())
     meta(name="keywords", content=getPreparedKeywords())
@@ -45,37 +55,55 @@ html(lang="en")
     meta(name="viewport", content="width=device-width")
 
     // Icons
-    link(rel="shortcut icon", href="ico/favicon.ico")
-    link(rel="apple-touch-icon-precomposed", sizes="144x144", href="ico/apple-touch-icon-144-precomposed.png")
-    link(rel="apple-touch-icon-precomposed", sizes="114x114", href="ico/apple-touch-icon-114-precomposed.png")
-    link(rel="apple-touch-icon-precomposed", sizes="72x72", href="ico/apple-touch-icon-72-precomposed.png")
-    link(rel="apple-touch-icon-precomposed", href="ico/apple-touch-icon-57-precomposed.png")
+    link(rel="shortcut icon", href="../ico/favicon.ico")
+    link(rel="apple-touch-icon-precomposed", sizes="144x144", href="../ico/apple-touch-icon-144-precomposed.png")
+    link(rel="apple-touch-icon-precomposed", sizes="114x114", href="../ico/apple-touch-icon-114-precomposed.png")
+    link(rel="apple-touch-icon-precomposed", sizes="72x72", href="../ico/apple-touch-icon-72-precomposed.png")
+    link(rel="apple-touch-icon-precomposed", href="../ico/apple-touch-icon-57-precomposed.png")
 
     //- Shims: IE6-8 support of HTML5 elements
     //if lt IE 9
       script(async src="http://html5shim.googlecode.com/svn/trunk/html5.js")
 
     // Styles
+    //- MRK - '!=' in Jade means output unescaped.
     != styles.toHTML()
 
   body
 
     // Markup
-    .navbar.navbar-fixed-top
-      .navbar-inner
-        .container
-          a.brand(href="/") Welcome
-          ul.nav
-            each doc in getCollection('pages').toJSON()
-              - clazz = (document.url === doc.url) ? 'active' : null
-              li(typeof="sioc:Page", about=doc.url, class=clazz)
-                a(href=doc.url, property="dc:title")= doc.title
-    .container
-      section#content.content!= content
-      hr
-      footer
-        div= site.copyright
-        div(style="font-style:italic; font-size: 12px") This website was last updated at #{site.date}
+    //- MRK - navbar is class in bootstrap for navbar at top of page.
+    //- MRK - is navbar, navbar-inner, container always div structure for navbar?
+    .wrapper
+      .navbar
+        .navbar-inner
+          .container
+            //- MRK - title of navbar
+            a.brand(href="/pages/index.html")
+              img(src='/img/Mathmentum_sm.png')
+            //- MRK - ul with list items form navigation buttons
+            ul.nav
+              //- MRK - loop through /src/documents/pages/ files to populate buttons
+              //- MRK - toJSON() call turns object into text
+              each doc in getCollection('pages').toJSON()
+                //- MRK - clazz used to determine whether particular button relates to current page displayed
+                - clazz = (document.url === doc.url) ? 'active' : null
+                //- MRK - what is typeof="sioc:Page"?  this attribute is output as is.
+                //- MRK - what is property-"dc:title"? this attribute is output as is.
+                li(typeof="sioc:Page", about=doc.url, class=clazz)
+                  a(href=doc.url, property="dc:title")= doc.title
+      //- MRK - main container content content of particular page
+      .container
+        //- MRK - next line translates into <section id="content" class="content"> followed by content of page
+        //- MRK - Is variable content at end of next line a docpad var containing conent of current page?
+        section#content.content!= content
+        //- MRK - In HTML5 hr is a break between different topics
+        hr
+        footer
+           //- MRK - site.* are defined in docpad.coffee
+          div= site.copyright
+          div(style="font-style:italic; font-size: 12px") This website was last updated at #{site.date}
 
-    // Scripts
-    != scripts.toHTML()
+      // Scripts
+      //- MRK - scripts collection was populated at beginning of this document.Output at end for faster loading
+      != scripts.toHTML()

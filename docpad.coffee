@@ -21,7 +21,7 @@ docpadConfig =
       ]
 
       # The default title of our website
-      title: "Your Website"
+      title: "Mathmentum"
 
       # The website description (for SEO)
       description: """
@@ -34,13 +34,13 @@ docpadConfig =
         """
 
       # The website author's name
-      author: "Your Name"
+      author: "Michael Klugerman"
 
       # The website author's email
-      email: "your@email.com"
+      email: "mike@mathmentum.com"
 
       # Your company's name
-      copyright: "© Your Company 2012"
+      copyright: "© Mathmentum 2013"
 
 
     # Helper Functions
@@ -78,8 +78,8 @@ docpadConfig =
       database.findAllLive({pageOrder: $exists: true}, [pageOrder:1,title:1])
 
     # This one, will fetch in all documents that will be outputted to the posts directory
-    posts: (database) ->
-      database.findAllLive({relativeOutDirPath:'posts'},[date:-1])
+    workshops: (database) ->
+      database.findAllLive({workshopOrder: $exists: true},[workshopOrder:1,title:1])
 
 
   # DocPad Events
@@ -109,6 +109,11 @@ docpadConfig =
           res.redirect 301, newUrl+req.url
         else
           next()
+
+# Ignore Custom Patterns - added from http://docpad.org/docs/config
+# Can be set to a regex of custom patterns to ignore from the scanning process
+# ignoreCustomPatterns: false  # default
+ignoreCustomPatterns: ['_MRK_Readme.txt']  # default    #- MRK - important that this is not indented
 
 
 # Export our DocPad Configuration
